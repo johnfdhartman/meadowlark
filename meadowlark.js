@@ -2,6 +2,13 @@ var express = require('express');
 
 var app = express();
 
+var fortunes = [
+	'thins happn',
+	'stop',
+	'no',
+	'good fortune!'
+];
+
 var handlebars = require('express3-handlebars')
 	.create({ defaultLayout:'main'});
 
@@ -17,7 +24,9 @@ app.get('/', function(req,res) {
 });
 
 app.get('/about', function(req,res){
-	res.render('about');
+	var randomFortune = 
+		fortunes[Math.floor(Math.random() * fortunes.length)];
+	res.render('about', {fortune: randomFortune});
 });
 
 app.use(function(req,res){
